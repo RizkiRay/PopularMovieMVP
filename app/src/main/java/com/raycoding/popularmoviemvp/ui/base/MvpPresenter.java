@@ -1,4 +1,4 @@
-package com.raycoding.popularmoviemvp.utils.base;
+package com.raycoding.popularmoviemvp.ui.base;
 
 /**
  * Created by ray <rizkirayraynaldy@gmail.com> on 04/05/18.

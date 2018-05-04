@@ -1,4 +1,4 @@
-package com.raycoding.popularmoviemvp.utils.base;
+package com.raycoding.popularmoviemvp.ui.base;
 
 import android.content.Context;
 import android.os.Bundle;

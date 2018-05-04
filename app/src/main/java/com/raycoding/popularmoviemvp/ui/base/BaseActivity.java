@@ -1,4 +1,4 @@
-package com.raycoding.popularmoviemvp.utils.base;
+package com.raycoding.popularmoviemvp.ui.base;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -37,6 +37,21 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
     @Override
     public void showLoading() {
         hideLoading();
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showMessage(int resId) {
+
+    }
+
+    @Override
+    public void showMessage(String message) {
+
     }
 
     @Override

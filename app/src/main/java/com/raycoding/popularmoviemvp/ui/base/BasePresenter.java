@@ -1,4 +1,4 @@
-package com.raycoding.popularmoviemvp.utils.base;
+package com.raycoding.popularmoviemvp.ui.base;
 
 import com.raycoding.popularmoviemvp.data.DataManager;
 import com.raycoding.popularmoviemvp.utils.rx.SchedulerProvider;

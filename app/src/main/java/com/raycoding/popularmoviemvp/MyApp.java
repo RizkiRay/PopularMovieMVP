@@ -25,4 +25,12 @@ public class MyApp extends Application {
                 .applicationModule(new ApplicationModule(this)).build();
         mApplicationComponent.inject(this);
     }
+
+    public ApplicationComponent getApplicationComponent() {
+        return mApplicationComponent;
+    }
+
+    public void setApplicationComponent(ApplicationComponent mApplicationComponent) {
+        this.mApplicationComponent = mApplicationComponent;
+    }
 }

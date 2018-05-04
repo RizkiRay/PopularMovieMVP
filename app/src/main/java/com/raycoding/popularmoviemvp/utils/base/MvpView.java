@@ -6,7 +6,8 @@ import android.support.annotation.StringRes;
  * Created by ray <rizkirayraynaldy@gmail.com> on 04/05/18.
  */
 
-public interface MvpView {void showLoading();
+public interface MvpView {
+    void showLoading();
 
     void hideLoading();
     

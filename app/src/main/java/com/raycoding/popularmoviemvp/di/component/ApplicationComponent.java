@@ -3,6 +3,8 @@ package com.raycoding.popularmoviemvp.di.component;
 import android.app.Application;
 import android.content.Context;
 
+import com.raycoding.popularmoviemvp.MyApp;
+import com.raycoding.popularmoviemvp.data.DataManager;
 import com.raycoding.popularmoviemvp.di.ApplicationContext;
 import com.raycoding.popularmoviemvp.di.module.ApplicationModule;
 
@@ -17,8 +19,12 @@ import dagger.Component;
 @Singleton
 @Component(modules = ApplicationModule.class)
 public interface ApplicationComponent {
+
+    void inject(MyApp app);
+
     @ApplicationContext
     Context context();
 
     Application application();
+    DataManager getDataManager();
 }

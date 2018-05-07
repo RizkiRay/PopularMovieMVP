@@ -12,7 +12,7 @@ public class MovieResponse {
     @SerializedName("page")
     private Long Page;
     @SerializedName("results")
-    private List<Result> Results;
+    private List<MovieResult> Results;
     @SerializedName("total_pages")
     private Long TotalPages;
     @SerializedName("total_results")
@@ -26,11 +26,11 @@ public class MovieResponse {
         Page = page;
     }
 
-    public List<Result> getResults() {
+    public List<MovieResult> getResults() {
         return Results;
     }
 
-    public void setResults(List<Result> results) {
+    public void setResults(List<MovieResult> results) {
         Results = results;
     }
 

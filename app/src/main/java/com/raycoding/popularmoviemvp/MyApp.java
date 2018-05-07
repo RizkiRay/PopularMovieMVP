@@ -9,6 +9,8 @@ import com.raycoding.popularmoviemvp.di.module.ApplicationModule;
 
 import javax.inject.Inject;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+
 /**
  * Created by ray <rizkirayraynaldy@gmail.com> on 03/05/18.
  */
@@ -16,6 +18,9 @@ import javax.inject.Inject;
 public class MyApp extends Application {
     @Inject
     DataManager mDataManager;
+
+    @Inject
+    CalligraphyConfig mCalligraphyConfig;
     private ApplicationComponent mApplicationComponent;
 
     @Override
@@ -24,6 +29,7 @@ public class MyApp extends Application {
         mApplicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this)).build();
         mApplicationComponent.inject(this);
+        CalligraphyConfig.initDefault(mCalligraphyConfig);
     }
 
     public ApplicationComponent getApplicationComponent() {

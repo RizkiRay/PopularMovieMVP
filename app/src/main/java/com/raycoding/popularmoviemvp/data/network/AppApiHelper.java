@@ -1,5 +1,7 @@
 package com.raycoding.popularmoviemvp.data.network;
 
+import android.util.Log;
+
 import com.raycoding.popularmoviemvp.data.network.model.MovieResponse;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 
@@ -13,6 +15,7 @@ import io.reactivex.Observable;
  */
 @Singleton
 public class AppApiHelper implements ApiHelper {
+    private static final String TAG = "AppApiHelper";
 
     @Inject
     AppApiHelper() {
@@ -20,7 +23,7 @@ public class AppApiHelper implements ApiHelper {
 
     @Override
     public Observable<MovieResponse> getPopularMovies(int page) {
-        return Rx2AndroidNetworking.get(ApiEndpoint.getPopularMovieUrl(1))
+        return Rx2AndroidNetworking.get(ApiEndpoint.getPopularMovieUrl(page))
                 .build()
                 .getObjectObservable(MovieResponse.class);
     }

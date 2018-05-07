@@ -3,6 +3,7 @@ package com.raycoding.popularmoviemvp.di.module;
 import android.app.Application;
 import android.content.Context;
 
+import com.raycoding.popularmoviemvp.R;
 import com.raycoding.popularmoviemvp.data.AppDataManager;
 import com.raycoding.popularmoviemvp.data.DataManager;
 import com.raycoding.popularmoviemvp.data.db.AppDbHelper;
@@ -21,6 +22,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * Created by ray <rizkirayraynaldy@gmail.com> on 03/05/18.
@@ -79,5 +81,14 @@ public class ApplicationModule {
     @Singleton
     DataManager provideDataManager(AppDataManager appDataManager) {
         return appDataManager;
+    }
+
+    @Provides
+    @Singleton
+    CalligraphyConfig provideCalligraphyDefaultConfig() {
+        return new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/comfortaa/Comfortaa-Regular.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build();
     }
 }

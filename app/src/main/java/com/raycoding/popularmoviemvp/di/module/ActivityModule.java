@@ -3,12 +3,16 @@ package com.raycoding.popularmoviemvp.di.module;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.raycoding.popularmoviemvp.di.ActivityContext;
 import com.raycoding.popularmoviemvp.ui.movie.MovieListMvpPresenter;
 import com.raycoding.popularmoviemvp.ui.movie.MovieListMvpView;
 import com.raycoding.popularmoviemvp.ui.movie.MovieListPresenter;
+import com.raycoding.popularmoviemvp.ui.movie.detail.MovieDetailMvpPresenter;
+import com.raycoding.popularmoviemvp.ui.movie.detail.MovieDetailMvpView;
+import com.raycoding.popularmoviemvp.ui.movie.detail.MovieDetailPresenter;
 import com.raycoding.popularmoviemvp.utils.rx.AppSchedulerProvider;
 import com.raycoding.popularmoviemvp.utils.rx.SchedulerProvider;
 
@@ -45,6 +49,11 @@ public class ActivityModule {
     }
 
     @Provides
+    GridLayoutManager provideGridLayoutManager(AppCompatActivity context) {
+        return new GridLayoutManager(context, 2);
+    }
+
+    @Provides
     CompositeDisposable provideCompositeDisposable() {
         return new CompositeDisposable();
     }
@@ -55,7 +64,12 @@ public class ActivityModule {
     }
 
     @Provides
-    MovieListMvpPresenter<MovieListMvpView> provideMoviePresenter(MovieListPresenter<MovieListMvpView> presenter){
+    MovieListMvpPresenter<MovieListMvpView> provideMoviePresenter(MovieListPresenter<MovieListMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    MovieDetailMvpPresenter<MovieDetailMvpView> provideMovieDetailPresenter(MovieDetailPresenter<MovieDetailMvpView> presenter) {
         return presenter;
     }
 }

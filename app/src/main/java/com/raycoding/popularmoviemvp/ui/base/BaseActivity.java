@@ -17,6 +17,7 @@ import com.raycoding.popularmoviemvp.di.module.ActivityModule;
 import com.raycoding.popularmoviemvp.utils.NetworkUtils;
 
 import butterknife.Unbinder;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by ray <rizkirayraynaldy@gmail.com> on 04/05/18.
@@ -52,6 +53,11 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
     @Override
     public void showMessage(String message) {
 
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @Override

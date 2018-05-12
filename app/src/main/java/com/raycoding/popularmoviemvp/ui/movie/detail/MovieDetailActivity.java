@@ -89,9 +89,6 @@ public class MovieDetailActivity extends BaseActivity implements MovieDetailMvpV
         Glide.with(this).load(BuildConfig.IMAGE_URL + mMovie.PosterPath)
                 .apply(new RequestOptions().centerCrop())
                 .into(mImagePoster);
-        Glide.with(this).load(R.drawable.ic_favorite_border)
-                .apply(new RequestOptions().centerCrop())
-                .into(mImageFavorite);
 
         mTextTitle.setText(mMovie.OriginalTitle);
         mTextRate.setText(String.valueOf(mMovie.VoteAverage));

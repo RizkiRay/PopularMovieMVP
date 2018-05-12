@@ -1,153 +1,101 @@
 
 package com.raycoding.popularmoviemvp.data.network.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.Generated;
+
 import com.google.gson.annotations.SerializedName;
 
 @Generated("net.hexar.json2pojo")
 @SuppressWarnings("unused")
-public class MovieResult {
+public class MovieResult implements Parcelable {
 
     @SerializedName("adult")
-    private Boolean Adult;
+    public Boolean Adult;
     @SerializedName("backdrop_path")
-    private String BackdropPath;
+    public String BackdropPath;
     @SerializedName("genre_ids")
-    private List<Long> GenreIds;
+    public List<Long> GenreIds;
     @SerializedName("id")
-    private Long Id;
+    public Long Id;
     @SerializedName("original_language")
-    private String OriginalLanguage;
+    public String OriginalLanguage;
     @SerializedName("original_title")
-    private String OriginalTitle;
+    public String OriginalTitle;
     @SerializedName("overview")
-    private String Overview;
+    public String Overview;
     @SerializedName("popularity")
-    private Double Popularity;
+    public Double Popularity;
     @SerializedName("poster_path")
-    private String PosterPath;
+    public String PosterPath;
     @SerializedName("release_date")
-    private String ReleaseDate;
+    public String ReleaseDate;
     @SerializedName("title")
-    private String Title;
+    public String Title;
     @SerializedName("video")
-    private Boolean Video;
+    public Boolean Video;
     @SerializedName("vote_average")
-    private Double VoteAverage;
+    public Double VoteAverage;
     @SerializedName("vote_count")
-    private Long VoteCount;
+    public Long VoteCount;
 
-    public Boolean getAdult() {
-        return Adult;
+    protected MovieResult(Parcel parcel) {
+        GenreIds = new ArrayList<>();
+        Adult = parcel.readByte() != 0;
+        BackdropPath = parcel.readString();
+        parcel.readList(GenreIds, null);
+        Id = parcel.readLong();
+        OriginalLanguage = parcel.readString();
+        OriginalTitle = parcel.readString();
+        Overview = parcel.readString();
+        Popularity = parcel.readDouble();
+        PosterPath = parcel.readString();
+        ReleaseDate = parcel.readString();
+        Title = parcel.readString();
+        Video = parcel.readByte() != 0;
+        VoteAverage = parcel.readDouble();
+        VoteCount = parcel.readLong();
     }
 
-    public void setAdult(Boolean adult) {
-        Adult = adult;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public String getBackdropPath() {
-        return BackdropPath;
-    }
+    public static final Creator<MovieResult> CREATOR = new Creator<MovieResult>() {
+        @Override
+        public MovieResult createFromParcel(Parcel parcel) {
+            return new MovieResult(parcel);
+        }
 
-    public void setBackdropPath(String backdropPath) {
-        BackdropPath = backdropPath;
-    }
+        @Override
+        public MovieResult[] newArray(int i) {
+            return new MovieResult[i];
+        }
+    };
 
-    public List<Long> getGenreIds() {
-        return GenreIds;
-    }
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        ArrayList<Long> genreIds = new ArrayList<>();
+        parcel.writeByte((byte) (Adult ? 1 : 0));
+        parcel.writeString(BackdropPath);
+        parcel.writeList(GenreIds);
+        parcel.writeLong(Id);
+        parcel.writeString(OriginalLanguage);
+        parcel.writeString(OriginalTitle);
+        parcel.writeString(Overview);
+        parcel.writeDouble(Popularity);
+        parcel.writeString(PosterPath);
+        parcel.writeString(ReleaseDate);
+        parcel.writeString(Title);
+        parcel.writeByte((byte) (Video ? 1 : 0));
+        parcel.writeDouble(VoteAverage);
+        parcel.writeLong(VoteCount);
 
-    public void setGenreIds(List<Long> genreIds) {
-        GenreIds = genreIds;
     }
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
-    }
-
-    public String getOriginalLanguage() {
-        return OriginalLanguage;
-    }
-
-    public void setOriginalLanguage(String originalLanguage) {
-        OriginalLanguage = originalLanguage;
-    }
-
-    public String getOriginalTitle() {
-        return OriginalTitle;
-    }
-
-    public void setOriginalTitle(String originalTitle) {
-        OriginalTitle = originalTitle;
-    }
-
-    public String getOverview() {
-        return Overview;
-    }
-
-    public void setOverview(String overview) {
-        Overview = overview;
-    }
-
-    public Double getPopularity() {
-        return Popularity;
-    }
-
-    public void setPopularity(Double popularity) {
-        Popularity = popularity;
-    }
-
-    public String getPosterPath() {
-        return PosterPath;
-    }
-
-    public void setPosterPath(String posterPath) {
-        PosterPath = posterPath;
-    }
-
-    public String getReleaseDate() {
-        return ReleaseDate;
-    }
-
-    public void setReleaseDate(String releaseDate) {
-        ReleaseDate = releaseDate;
-    }
-
-    public String getTitle() {
-        return Title;
-    }
-
-    public void setTitle(String title) {
-        Title = title;
-    }
-
-    public Boolean getVideo() {
-        return Video;
-    }
-
-    public void setVideo(Boolean video) {
-        Video = video;
-    }
-
-    public Double getVoteAverage() {
-        return VoteAverage;
-    }
-
-    public void setVoteAverage(Double voteAverage) {
-        VoteAverage = voteAverage;
-    }
-
-    public Long getVoteCount() {
-        return VoteCount;
-    }
-
-    public void setVoteCount(Long voteCount) {
-        VoteCount = voteCount;
-    }
-
 }

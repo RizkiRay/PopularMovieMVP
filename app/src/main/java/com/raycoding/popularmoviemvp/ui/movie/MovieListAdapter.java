@@ -47,12 +47,12 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MovieResult movie = mMovies.get(position);
-        Log.i(TAG, "onBindViewHolder: " + BuildConfig.IMAGE_URL + movie.getPosterPath());
-        Glide.with(mContext).load(BuildConfig.IMAGE_URL + movie.getPosterPath())
+        Log.i(TAG, "onBindViewHolder: " + BuildConfig.IMAGE_URL + movie.PosterPath);
+        Glide.with(mContext).load(BuildConfig.IMAGE_URL + movie.PosterPath)
                 .apply(new RequestOptions().centerCrop())
                 .into(holder.imagePoster);
-        holder.textTitle.setText(movie.getOriginalTitle());
-        holder.textShortDesc.setText(movie.getOverview());
+        holder.textTitle.setText(movie.OriginalTitle);
+        holder.textShortDesc.setText(movie.Overview);
     }
 
     @Override
@@ -76,8 +76,8 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
         }
 
         @OnClick(R.id.container)
-        void onItemClicked(){
-            mContext.startActivity(MovieDetailActivity.getStartIntent(mContext));
+        void onItemClicked() {
+            mContext.startActivity(MovieDetailActivity.getStartIntent(mContext, mMovies.get(getAdapterPosition())));
         }
     }
 }

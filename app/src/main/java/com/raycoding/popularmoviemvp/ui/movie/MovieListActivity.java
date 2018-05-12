@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.raycoding.popularmoviemvp.R;
 import com.raycoding.popularmoviemvp.data.network.model.MovieResult;
@@ -32,6 +34,11 @@ public class MovieListActivity extends BaseActivity implements MovieListMvpView 
     @Inject
     GridLayoutManager mGridLayoutManager;
 
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @BindView(R.id.title)
+    TextView mToolbarTitle;
+
     @BindView(R.id.recyler_movie)
     RecyclerView mRecyclerMovie;
     @BindView(R.id.pbar_loading)
@@ -54,6 +61,14 @@ public class MovieListActivity extends BaseActivity implements MovieListMvpView 
 
     @Override
     protected void setUp() {
+        mToolbar.setTitle("");
+        setSupportActionBar(mToolbar);
+    }
+
+    @Override
+    protected void onDestroy() {
+        mPresenter.onDetach();
+        super.onDestroy();
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.raycoding.popularmoviemvp.ui.movie.detail;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.Toolbar;
@@ -12,8 +13,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.RequestOptions;
+import com.raycoding.popularmoviemvp.BuildConfig;
 import com.raycoding.popularmoviemvp.R;
+import com.raycoding.popularmoviemvp.data.network.model.MovieResult;
 import com.raycoding.popularmoviemvp.ui.base.BaseActivity;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -26,6 +32,7 @@ import butterknife.ButterKnife;
 
 public class MovieDetailActivity extends BaseActivity implements MovieDetailMvpView {
 
+    private static final String EXTRA_MOVIE = "EXTRA_MOVIE";
     @Inject
     MovieDetailMvpPresenter<MovieDetailMvpView> mPresenter;
 
@@ -33,16 +40,26 @@ public class MovieDetailActivity extends BaseActivity implements MovieDetailMvpV
     Toolbar mToolbar;
     @BindView(R.id.appbar_layout)
     AppBarLayout mAppBarLayout;
-    @BindView(R.id.title)
-    TextView mToolbarTitle;
-//
+
     @BindView(R.id.image_poster)
     ImageView mImagePoster;
-//    @BindView(R.id.image_favorite)
-//    ImageView mImageFavorite;
+    @BindView(R.id.text_rate)
+    TextView mTextRate;
 
-    public static Intent getStartIntent(Context context) {
+    @BindView(R.id.image_favorite)
+    ImageView mImageFavorite;
+    @BindView(R.id.text_title)
+    TextView mTextTitle;
+    @BindView(R.id.text_release_date)
+    TextView mTextReleaseDate;
+    @BindView(R.id.text_synopsis)
+    TextView mTextSynopsis;
+
+    private MovieResult mMovie;
+
+    public static Intent getStartIntent(Context context, MovieResult movie) {
         Intent i = new Intent(context, MovieDetailActivity.class);
+        i.putExtra(EXTRA_MOVIE, movie);
         return i;
     }
 
@@ -53,49 +70,45 @@ public class MovieDetailActivity extends BaseActivity implements MovieDetailMvpV
 
         getActivityComponent().inject(this);
         setUnbinder(ButterKnife.bind(this));
-
-//        Glide.with(this).load(R.drawable.uday_teguh)
-//                .apply(new RequestOptions().centerCrop())
-//                .into(mImagePoster);
-//        Glide.with(this).load(R.drawable.ic_favorite_border)
-//                .apply(new RequestOptions().centerCrop())
-//                .into(mImageFavorite);
-
         mPresenter.onAttach(this);
         setUp();
     }
 
     @Override
     protected void setUp() {
-        mToolbar.setTitle("Detail");
+        mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-//        mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-//            int scrollRange = -1;
-//            @Override
-//            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-//                //Initialize the size of the scroll
-//                if (scrollRange == -1) {
-//                    scrollRange = appBarLayout.getTotalScrollRange();
-//                }
-//                //Check if the view is collapsed
-//                if (scrollRange + verticalOffset == 0) {
-////                    toolbar.setBackgroundColor(ContextCompat.getColor(MovieDetailActivity.this, R.color.colorPrimary));
-//                    mToolbarTitle.setText(getString(R.string.app_name));
-//                } else {
-//                    getSupportActionBar().setTitle(" ");
-//                    mToolbarTitle.setText(" ");
-//                }
-//            }
-//        });
+
+
+        mMovie = getIntent().getParcelableExtra(EXTRA_MOVIE);
+
+        Glide.with(this).load(BuildConfig.IMAGE_URL + mMovie.PosterPath)
+                .apply(new RequestOptions().centerCrop())
+                .into(mImagePoster);
+        Glide.with(this).load(R.drawable.ic_favorite_border)
+                .apply(new RequestOptions().centerCrop())
+                .into(mImageFavorite);
+
+        mTextTitle.setText(mMovie.OriginalTitle);
+        mTextRate.setText(String.valueOf(mMovie.VoteAverage));
+        mTextSynopsis.setText(mMovie.Overview);
+        mTextReleaseDate.setText(mMovie.ReleaseDate);
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        mPresenter.onDetach();
+        super.onDestroy();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 return true;

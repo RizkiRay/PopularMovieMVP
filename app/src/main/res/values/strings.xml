@@ -3,4 +3,5 @@
     <string name="image_poster_desc">Poster Image</string>
     <string name="image_rate_desc">Rating Image</string>
     <string name="text_rate_sample">9.9</string>
+    <string name="title_movie_list">Movie List</string>
 </resources>
